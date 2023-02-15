@@ -7,17 +7,27 @@ public class BallController : MonoBehaviour
     private Rigidbody2D ballRB;
     public float ballSpeed;
     public bool hasRun;
-    public float ballSpeedIncrease;
+    public float speedIncreasePerRound;
+    public float speedIncreaseOnTouch;
+    private float storeBallSpeed = 0;
 
     // Start is called before the first frame update
     private void Start() {
-        startGame(ballSpeed);
+        if(!hasRun){
+            if(Input.GetKeyDown(KeyCode.Space)){
+            ballSpeed += speedIncreasePerRound;
+            storeBallSpeed = ballSpeed;
+            startGame(ballSpeed);
+            hasRun = true;
+            }
+        }
     }
    private void Update() {
     //start round if hasRun=false
     if(!hasRun){
         if(Input.GetKeyDown(KeyCode.Space)){
-            ballSpeed += ballSpeedIncrease;
+            ballSpeed += speedIncreasePerRound;
+            storeBallSpeed = ballSpeed;
             startGame(ballSpeed);
             hasRun = true;
         }
@@ -31,8 +41,13 @@ public class BallController : MonoBehaviour
             ballRB.velocity = new Vector2(0,0);
             this.gameObject.transform.position = new Vector2(0,0);
             hasRun = false;
+            ballSpeed = storeBallSpeed;
+        }else{
+            ballSpeed += speedIncreaseOnTouch;
+            ballRB.velocity = ballRB.velocity.normalized * ballSpeed;
+
         }
-        
+        //when the ball touches an object increase speed of the ball.
     }
 
     //starting round fuction. Assign random direction to the ball.

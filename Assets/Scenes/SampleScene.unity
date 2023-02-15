@@ -773,9 +773,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c877769ef4c01784ea269d7341b91aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballSpeed: 4
+  ballSpeed: 7
   hasRun: 0
-  ballSpeedIncrease: 0.5
+  speedIncreasePerRound: 0.3
+  speedIncreaseOnTouch: 0.1
 --- !u!212 &1117321695
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1334,7 +1335,7 @@ Transform:
   m_GameObject: {fileID: 1319421080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8, y: 0, z: 0}
-  m_LocalScale: {x: 0.34, y: 1.5, z: 1}
+  m_LocalScale: {x: 0.25, y: 1.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1597,7 +1598,7 @@ GameObject:
   - component: {fileID: 1749375206}
   - component: {fileID: 1749375205}
   m_Layer: 0
-  m_Name: Player (1)
+  m_Name: Player 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1725,7 +1726,7 @@ Transform:
   m_GameObject: {fileID: 1749375204}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8, y: 0, z: 0}
-  m_LocalScale: {x: 0.34, y: 1.5, z: 1}
+  m_LocalScale: {x: 0.25, y: 1.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
