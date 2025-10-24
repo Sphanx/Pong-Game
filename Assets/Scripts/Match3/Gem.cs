@@ -110,6 +110,8 @@ public class Gem : MonoBehaviour
         }
     }
 
+    // Optional: Use this method if you want to use simple colored sprites instead of custom gem prefabs
+    // Note: This is not called automatically. The gem type is set by the prefab itself.
     public void SetColor()
     {
         if (spriteRenderer != null)

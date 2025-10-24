@@ -19,24 +19,47 @@ Unity için Candy Crush benzeri tam özellikli Match 3 oyunu implementasyonu.
 1. Unity'de yeni bir sahne oluşturun: `File > New Scene`
 2. `Assets/Scenes/` klasörüne `Match3Scene` olarak kaydedin
 
-### 2. Gem Prefab'ı Oluşturun
+### 2. Gem Prefab'larını Oluşturun
 
+Her gem tipi için ayrı prefab oluşturmanız gerekmektedir (toplam 6 prefab):
+
+**İlk Gem Prefab'ını Oluşturun (Kırmızı):**
 1. Yeni bir 2D Sprite GameObject oluşturun: `GameObject > 2D Object > Sprite`
-2. Adını "Gem" olarak değiştirin
+2. Adını "GemRed" olarak değiştirin
 3. `Gem.cs` script bileşenini ekleyin
-4. `Sprite Renderer` bileşeni ekleyin (varsayılan olarak olmalı)
-5. Sprite'ı bir daire veya kare sprite olarak ayarlayın (Unity'nin yerleşik sprite'ı veya kendiniz oluşturun)
+4. Inspector'da `Gem Type` değerini `Red` olarak ayarlayın
+5. Sprite'ı kırmızı bir şeker/taş sprite'ı olarak ayarlayın (kendi sprite'ınız veya Unity'nin Circle sprite'ı)
+   - Kendi sprite'ınız yoksa, Circle sprite kullanın ve Sprite Renderer'ın Color değerini kırmızı yapın
 6. `Circle Collider 2D` veya `Box Collider 2D` bileşeni ekleyin
-7. "Gem" GameObject'ini `Assets/Scripts/Match3/` klasörüne sürükleyerek prefab oluşturun
-8. Gem'i sahne hiyerarşisinden silin
+7. "GemRed" GameObject'ini `Assets/Scripts/Match3/` klasörüne sürükleyerek prefab oluşturun
+8. Sahne hiyerarşisinden silin
+
+**Diğer 5 Gem Prefab'ını Oluşturun:**
+9. Yukarıdaki adımları tekrarlayarak şu prefab'ları oluşturun:
+   - **GemBlue** (Gem Type: Blue, Renk: Mavi)
+   - **GemGreen** (Gem Type: Green, Renk: Yeşil)
+   - **GemYellow** (Gem Type: Yellow, Renk: Sarı)
+   - **GemPurple** (Gem Type: Purple, Renk: Mor)
+   - **GemOrange** (Gem Type: Orange, Renk: Turuncu)
+
+**Önemli:** Her prefab'ın farklı görsel özelliklere (sprite veya renk) sahip olması gerekir, böylece oyunda birbirinden ayırt edilebilirler.
 
 ### 3. Tahtayı Kurun
 
 1. Boş bir GameObject oluşturun: `GameObject > Create Empty`
 2. Adını "Board" olarak değiştirin
 3. `Board.cs` script bileşenini ekleyin
-4. Inspector'da, oluşturduğunuz Gem prefab'ını "Gem Prefab" alanına atayın
-5. Width ve Height değerlerini 8 olarak ayarlayın (veya tercih ettiğiniz boyut)
+4. Inspector'da, `Gem Prefabs` alanının boyutunu 6 olarak ayarlayın
+5. Oluşturduğunuz 6 gem prefab'ını şu sırayla `Gem Prefabs` dizisine ekleyin:
+   - Element 0: GemRed
+   - Element 1: GemBlue
+   - Element 2: GemGreen
+   - Element 3: GemYellow
+   - Element 4: GemPurple
+   - Element 5: GemOrange
+
+   **Önemli:** Sıralama önemlidir! Gem.cs içindeki GemType enum sırası ile eşleşmelidir.
+6. Width ve Height değerlerini 8 olarak ayarlayın (veya tercih ettiğiniz boyut)
 
 ### 4. MatchFinder Oluşturun
 

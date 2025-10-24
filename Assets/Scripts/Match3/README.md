@@ -19,24 +19,47 @@ A complete Match 3 game implementation for Unity, similar to Candy Crush.
 1. In Unity, create a new scene: `File > New Scene`
 2. Save it as `Match3Scene` in `Assets/Scenes/`
 
-### 2. Create the Gem Prefab
+### 2. Create the Gem Prefabs
 
+You need to create separate prefabs for each gem type (6 prefabs total):
+
+**Create the First Gem Prefab (Red):**
 1. Create a new 2D Sprite GameObject: `GameObject > 2D Object > Sprite`
-2. Rename it to "Gem"
+2. Rename it to "GemRed"
 3. Add the `Gem.cs` script component to it
-4. Add a `Sprite Renderer` component (should be there by default)
-5. Set the sprite to a circle or square sprite (Unity's built-in sprite or create your own)
+4. In the Inspector, set `Gem Type` to `Red`
+5. Set the sprite to a red candy/gem sprite (your own sprite or Unity's Circle sprite)
+   - If you don't have custom sprites, use Circle sprite and set the Sprite Renderer's Color to red
 6. Add a `Circle Collider 2D` or `Box Collider 2D` component
-7. Drag the "Gem" GameObject into the `Assets/Scripts/Match3/` folder to create a prefab
-8. Delete the Gem from the scene hierarchy
+7. Drag the "GemRed" GameObject into the `Assets/Scripts/Match3/` folder to create a prefab
+8. Delete it from the scene hierarchy
+
+**Create the Other 5 Gem Prefabs:**
+9. Repeat the above steps to create these prefabs:
+   - **GemBlue** (Gem Type: Blue, Color: Blue)
+   - **GemGreen** (Gem Type: Green, Color: Green)
+   - **GemYellow** (Gem Type: Yellow, Color: Yellow)
+   - **GemPurple** (Gem Type: Purple, Color: Purple)
+   - **GemOrange** (Gem Type: Orange, Color: Orange)
+
+**Important:** Each prefab must have different visual characteristics (sprite or color) so they can be distinguished in the game.
 
 ### 3. Setup the Board
 
 1. Create an empty GameObject: `GameObject > Create Empty`
 2. Rename it to "Board"
 3. Add the `Board.cs` script component
-4. In the Inspector, assign the Gem prefab you created to the "Gem Prefab" field
-5. Set Width and Height to 8 (or your preferred size)
+4. In the Inspector, set the `Gem Prefabs` array size to 6
+5. Assign the 6 gem prefabs you created to the `Gem Prefabs` array in this order:
+   - Element 0: GemRed
+   - Element 1: GemBlue
+   - Element 2: GemGreen
+   - Element 3: GemYellow
+   - Element 4: GemPurple
+   - Element 5: GemOrange
+
+   **Important:** The order matters! It must match the GemType enum order in Gem.cs.
+6. Set Width and Height to 8 (or your preferred size)
 
 ### 4. Create MatchFinder
 

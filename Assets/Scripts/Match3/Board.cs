@@ -16,7 +16,7 @@ public class Board : MonoBehaviour
     public int height = 8;
     public float gemSpeed = 0.5f;
 
-    public GameObject gemPrefab;
+    public GameObject[] gemPrefabs; // Array of gem prefabs (Red, Blue, Green, Yellow, Purple, Orange)
     public GameObject[,] allGems;
     public Gem[,] gems;
 
@@ -39,25 +39,26 @@ public class Board : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 Vector2 pos = new Vector2(x, y);
-                GameObject gem = Instantiate(gemPrefab, pos, Quaternion.identity);
-                gem.transform.parent = transform;
-                gem.name = "Gem(" + x + "," + y + ")";
 
-                int gemType = Random.Range(0, 6);
+                int gemType = Random.Range(0, gemPrefabs.Length);
                 int maxIterations = 0;
 
                 // Avoid creating matches at start
                 while (CheckForMatches(x, y, (Gem.GemType)gemType) && maxIterations < 100)
                 {
-                    gemType = Random.Range(0, 6);
+                    gemType = Random.Range(0, gemPrefabs.Length);
                     maxIterations++;
                 }
+
+                // Instantiate the correct gem prefab based on type
+                GameObject gem = Instantiate(gemPrefabs[gemType], pos, Quaternion.identity);
+                gem.transform.parent = transform;
+                gem.name = "Gem(" + x + "," + y + ")";
 
                 Gem gemComponent = gem.GetComponent<Gem>();
                 gemComponent.column = x;
                 gemComponent.row = y;
                 gemComponent.gemType = (Gem.GemType)gemType;
-                gemComponent.SetColor();
 
                 allGems[x, y] = gem;
                 gems[x, y] = gemComponent;
@@ -234,15 +235,18 @@ public class Board : MonoBehaviour
                 if (allGems[x, y] == null)
                 {
                     Vector2 pos = new Vector2(x, y + height);
-                    GameObject gem = Instantiate(gemPrefab, pos, Quaternion.identity);
+
+                    int gemType = Random.Range(0, gemPrefabs.Length);
+
+                    // Instantiate the correct gem prefab based on type
+                    GameObject gem = Instantiate(gemPrefabs[gemType], pos, Quaternion.identity);
                     gem.transform.parent = transform;
                     gem.name = "Gem(" + x + "," + y + ")";
 
                     Gem gemComponent = gem.GetComponent<Gem>();
                     gemComponent.column = x;
                     gemComponent.row = y;
-                    gemComponent.gemType = (Gem.GemType)Random.Range(0, 6);
-                    gemComponent.SetColor();
+                    gemComponent.gemType = (Gem.GemType)gemType;
 
                     allGems[x, y] = gem;
                     gems[x, y] = gemComponent;
